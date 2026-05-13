@@ -45,11 +45,10 @@ Your primary data stays in a highly-optimized library inside your browser's loca
 ```
 notes/
 ├── index.html         # HTML structure & Generic UI Modals
-├── style.css          # Modern UI styling and tokens
+├── style.css          # This file has the style of the project
 ├── app.js             # Core algorithms (Multi-note logic, E2EE, hashing)
 ├── manifest.json      # PWA manifest
-├── sw.js              # Service worker for offline app install
-└── README.md          # This file
+└── README.md          # This file has the information about the project
 ```
 
 ## Why Browser Notes?
