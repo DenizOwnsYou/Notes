@@ -1,6 +1,6 @@
 # Browser Notes
 
-A beautiful, minimalist notes app that lives in your browser
+A minimalist notes app that lives in your browser
 
 ## Features
 
