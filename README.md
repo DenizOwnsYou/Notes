@@ -1,12 +1,6 @@
 # Browser Notes
 
-<div align="center">
-
-**A beautiful, minimalist notes app that lives in your browser**
-
-</div>
-
----
+A beautiful, minimalist notes app that lives in your browser
 
 ## Features
 
