@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="A Minimalist notes app that lives in your browser">
+  <meta name="author" content="Browser Notes">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/x-icon" href="website.ico">
+  <title>Browser Notes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <main class="main">
+    <div class="toolbar">
+      <button class="toolbar-btn" data-action="bold" title="Bold (Ctrl+B)" aria-label="Bold">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path>
+          <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path>
+        </svg>
+        <span class="toolbar-tooltip">Bold</span>
+      </button>
+
+      <button class="toolbar-btn" data-action="italic" title="Italic (Ctrl+I)" aria-label="Italic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <line x1="19" y1="4" x2="10" y2="4"></line>
+          <line x1="14" y1="20" x2="5" y2="20"></line>
+          <line x1="15" y1="4" x2="9" y2="20"></line>
+        </svg>
+        <span class="toolbar-tooltip">Italic</span>
+      </button>
+
+      <button class="toolbar-btn" data-action="underline" title="Underline (Ctrl+U)" aria-label="Underline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"></path>
+          <line x1="4" y1="21" x2="20" y2="21"></line>
+        </svg>
+        <span class="toolbar-tooltip">Underline</span>
+      </button>
+
+      <button class="toolbar-btn" data-action="strike" title="Strikethrough" aria-label="Strikethrough">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M5 12h14"></path>
+          <path d="M16 8.5c0-2.5-2-4.5-4.5-4.5S7 6 7 8.5c0 1 .5 1.5 1 2"></path>
+          <path d="M7 15.5c0 2.5 2 4.5 4.5 4.5s4.5-2 4.5-4.5c0-1-.5-1.5-1-2"></path>
+        </svg>
+        <span class="toolbar-tooltip">Strikethrough</span>
+      </button>
+
+      <div class="toolbar-separator"></div>
+
+      <button class="toolbar-btn" data-action="h1" title="Heading 1" aria-label="Heading 1">
+        <span style="font-weight: 700; font-size: 16px;">H1</span>
+        <span class="toolbar-tooltip">Heading 1</span>
+      </button>
+
+      <button class="toolbar-btn" data-action="h2" title="Heading 2" aria-label="Heading 2">
+        <span style="font-weight: 600; font-size: 14px;">H2</span>
+        <span class="toolbar-tooltip">Heading 2</span>
+      </button>
+
+      <button class="toolbar-btn" data-action="h3" title="Heading 3" aria-label="Heading 3">
+        <span style="font-weight: 600; font-size: 12px;">H3</span>
+        <span class="toolbar-tooltip">Heading 3</span>
+      </button>
+
+      <div class="toolbar-separator"></div>
+
+      <button class="toolbar-btn" data-action="code" title="Inline Code" aria-label="Inline Code">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <polyline points="16,18 22,12 16,6"></polyline>
+          <polyline points="8,6 2,12 8,18"></polyline>
+        </svg>
+        <span class="toolbar-tooltip">Inline Code</span>
+      </button>
+
+      <button class="toolbar-btn" data-action="codeblock" title="Code Block" aria-label="Code Block">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="9" y1="9" x2="15" y2="15"></line>
+          <line x1="15" y1="9" x2="9" y2="15"></line>
+        </svg>
+        <span class="toolbar-tooltip">Code Block</span>
+      </button>
+
+      <div class="toolbar-separator"></div>
+
+      <button class="toolbar-btn" data-action="todo" title="Task List" aria-label="Task List">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <polyline points="9 11 12 14 23 3"></polyline>
+          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+        </svg>
+        <span class="toolbar-tooltip">Task List</span>
+      </button>
+
+      <button class="toolbar-btn" data-action="ul" title="Bullet List" aria-label="Bullet List">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <line x1="8" y1="6" x2="21" y2="6"></line>
+          <line x1="8" y1="12" x2="21" y2="12"></line>
+          <line x1="8" y1="18" x2="21" y2="18"></line>
+          <line x1="3" y1="6" x2="3.01" y2="6"></line>
+          <line x1="3" y1="12" x2="3.01" y2="12"></line>
+          <line x1="3" y1="18" x2="3.01" y2="18"></line>
+        </svg>
+        <span class="toolbar-tooltip">Bullet List</span>
+      </button>
+
+      <button class="toolbar-btn" data-action="ol" title="Numbered List" aria-label="Numbered List">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <line x1="10" y1="6" x2="21" y2="6"></line>
+          <line x1="10" y1="12" x2="21" y2="12"></line>
+          <line x1="10" y1="18" x2="21" y2="18"></line>
+          <path d="M4 6h1v4"></path>
+          <path d="M4 10h2"></path>
+          <path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"></path>
+        </svg>
+        <span class="toolbar-tooltip">Numbered List</span>
+      </button>
+
+      <div class="toolbar-separator"></div>
+
+      <button class="toolbar-btn" data-action="quote" title="Quote" aria-label="Quote">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path
+            d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z">
+          </path>
+          <path
+            d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z">
+          </path>
+        </svg>
+        <span class="toolbar-tooltip">Quote</span>
+      </button>
+
+      <button class="toolbar-btn" data-action="link" title="Link (Ctrl+K)" aria-label="Link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+        </svg>
+        <span class="toolbar-tooltip">Link</span>
+      </button>
+
+      <div class="toolbar-separator"></div>
+
+      <button class="toolbar-btn" data-action="share" title="Share" aria-label="Share">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+          <polyline points="16,6 12,2 8,6"></polyline>
+          <line x1="12" y1="2" x2="12" y2="15"></line>
+        </svg>
+        <span class="toolbar-tooltip">Share</span>
+      </button>
+
+      <button class="toolbar-btn" data-action="new" title="New Note" aria-label="New Note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        <span class="toolbar-tooltip">New Note</span>
+      </button>
+
+      <div class="toolbar-separator"></div>
+
+      <button class="toolbar-btn" data-action="hr" title="Horizontal Rule" aria-label="Horizontal Rule">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        <span class="toolbar-tooltip">Horizontal Rule</span>
+      </button>
+    </div>
+
+    <div class="editor-container">
+      <div class="editor" contenteditable="true"></div>
+      <div class="status-bar">
+        <span id="word-count">0 words</span>
+        <span id="char-count">0 characters</span>
+      </div>
+    </div>
+  </main>
+
+  <button class="fab" onclick="app.toggleMenu()" aria-label="Settings">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"></circle>
+      <path
+        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+      </path>
+    </svg>
+  </button>
+
+  <nav class="menu" role="menu">
+    <button class="menu-item" onclick="app.openLibrary()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+      </svg>
+      My Notes
+    </button>
+    <button class="menu-item" onclick="app.newNote()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+      New Note
+    </button>
+    <button class="menu-item" onclick="app.download('txt')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14,2 14,8 20,8"></polyline>
+        <line x1="12" y1="18" x2="12" y2="12"></line>
+        <polyline points="9,15 12,18 15,15"></polyline>
+      </svg>
+      Save as TXT
+    </button>
+    <button class="menu-item" onclick="app.download('markdown')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14,2 14,8 20,8"></polyline>
+        <line x1="16" y1="13" x2="8" y2="13"></line>
+        <line x1="16" y1="17" x2="8" y2="17"></line>
+        <polyline points="10,9 9,9 8,9"></polyline>
+      </svg>
+      Save as Markdown
+    </button>
+    <button class="menu-item" onclick="app.copyContent()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+      </svg>
+      Copy Content
+    </button>
+    <button class="menu-item" onclick="app.showProtectionModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+      Password Protect
+    </button>
+    <button class="menu-item" id="install-app-btn" onclick="app.installApp()"
+      style="display:none; color: var(--accent);">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+      Install App
+    </button>
+  </nav>
+
+  <div class="modal-overlay" id="library-modal">
+    <div class="modal" style="max-width: 500px; max-height: 80vh; overflow-y: auto;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h3 class="modal-title" style="margin: 0;">My Notes</h3>
+        <button class="btn btn-ghost"
+          onclick="document.getElementById('library-modal').classList.remove('visible')">Close</button>
+      </div>
+      <div class="modal-body">
+        <div style="position: relative; margin-bottom: 1rem;">
+          <input type="text" id="library-search" class="input-field" placeholder="Search notes..."
+            style="padding-left: 2.5rem; margin-top: 0;">
+          <svg
+            style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 1.25rem; height: 1.25rem; color: var(--text-tertiary);"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </div>
+        <button class="btn btn-primary" onclick="app.newNote()"
+          style="width: 100%; justify-content: center; margin-bottom: 1rem;">Create New Note</button>
+        <div id="library-list" style="display: flex; flex-direction: column; gap: 0.5rem;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="password-modal">
+    <div class="modal">
+      <h3 class="modal-title" id="password-modal-title">Unlock Note</h3>
+      <div class="modal-body" id="password-modal-body">This note is encrypted. Please enter the password to unlock it.
+      </div>
+      <input type="password" class="input-field" id="password-input" placeholder="Password">
+      <div class="modal-actions">
+        <button class="btn btn-ghost" id="password-cancel" style="display:none">Cancel</button>
+        <button class="btn btn-primary" id="password-submit">Unlock</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="set-password-modal">
+    <div class="modal">
+      <h3 class="modal-title">Password Protect</h3>
+      <div class="modal-body">Set a password to encrypt this note end-to-end. Leave empty to remove password.</div>
+      <input type="password" class="input-field" id="set-password-input" placeholder="New Password">
+      <div class="modal-actions">
+        <button class="btn btn-ghost"
+          onclick="document.getElementById('set-password-modal').classList.remove('visible')">Cancel</button>
+        <button class="btn btn-error" id="remove-password-btn" style="display:none">Remove</button>
+        <button class="btn btn-primary" id="set-password-submit">Protect</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="share-modal">
+    <div class="modal share-modal-content">
+      <div class="modal-header"
+        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h3 class="modal-title" style="margin: 0;">Share Note</h3>
+        <button class="btn btn-ghost"
+          onclick="document.getElementById('share-modal').classList.remove('visible')">Close</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-subtitle">Generate a link to share this note with others.</p>
+
+        <div class="share-actions">
+          <button class="share-btn share-btn-primary" id="share-readonly-btn">
+            <div class="share-btn-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </div>
+            <div class="share-btn-text">
+              <span>Read-Only Link</span>
+              <small>Viewers cannot edit</small>
+            </div>
+          </button>
+
+          <button class="share-btn share-btn-secondary" id="share-editable-btn" aria-label="Share a Copy">
+            <div class="share-btn-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+            </div>
+            <div class="share-btn-text">
+              <span>Share a Copy</span>
+              <small>Recipient gets their own copy, changes don't sync back</small>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="generic-confirm-modal">
+    <div class="modal" style="max-width: 400px;">
+      <h3 class="modal-title" id="gc-title">Confirm</h3>
+      <div class="modal-body" id="gc-body" style="margin-bottom: 0;">Are you sure?</div>
+      <div class="modal-actions" style="margin-top: 1.5rem;">
+        <button class="btn btn-ghost" id="gc-cancel" style="padding: 0.5rem 1rem;">Cancel</button>
+        <button class="btn btn-primary" id="gc-confirm" style="padding: 0.5rem 1rem;">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="generic-prompt-modal">
+    <div class="modal" style="max-width: 400px;">
+      <h3 class="modal-title" id="gp-title">Input</h3>
+      <input type="text" class="input-field" id="gp-input" placeholder="" autocomplete="off"
+        style="margin-top: 0.5rem;">
+      <div class="modal-actions" style="margin-top: 1.5rem;">
+        <button class="btn btn-ghost" id="gp-cancel" style="padding: 0.5rem 1rem;">Cancel</button>
+        <button class="btn btn-primary" id="gp-confirm" style="padding: 0.5rem 1rem;">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" role="alert">
+    <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20,6 9,17 4,12"></polyline>
+    </svg>
+    <span class="toast-message"></span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
